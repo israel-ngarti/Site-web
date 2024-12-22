@@ -9,7 +9,7 @@ website:
         text: Accueil
       - href: Statistiques descriptives.qmd
         text: Statistiques descriptives
-      - href: Analyses de données.qmd
+      - href: Analyses de Données.qmd
         text: Analyses de données
   
 
