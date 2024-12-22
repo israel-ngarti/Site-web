@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs  # Spécifiez "docs" comme dossier de sortie
+
+website:
+  navbar:
+    left:
+      - href: index.qmd
+        text: Accueil
+      - href: Statistiques descriptives.qmd
+        text: Statistiques descriptives
+      - href: Analyses de données.qmd
+        text: Analyses de données
+  
+
+format:
+  html:
+    theme: cayman
+    css: styles.css
+    toc: true
+
+editor: visual

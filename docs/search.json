@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html#présentation-du-projet",
+    "href": "index.html#présentation-du-projet",
+    "title": "Bienvenue sur notre site",
+    "section": "Présentation du projet",
+    "text": "Présentation du projet\nNotre objectif est d’explorer des questions fascinantes telles que : Les entreprises les plus innovantes paient-elles les meilleurs salaires ? Demandent-elles davantage de **data scientists** ou de compétences en ** machine learning ** ? Quels secteurs montrent les plus grandes tendances en termes d’innovation et de recrutement ?"
+  },
+  {
+    "objectID": "index.html#objectifs-du-projet",
+    "href": "index.html#objectifs-du-projet",
+    "title": "Bienvenue sur notre site",
+    "section": "Objectifs du projet",
+    "text": "Objectifs du projet\n\nAnalyser les données : Identifier des tendances et des patterns cachés dans les bases de données.\nVisualisation intuitive : Offrir des graphiques et des visualisations interactives pour rendre les résultats accessibles."
+  },
+  {
+    "objectID": "index.html#naviguez-sur-le-site",
+    "href": "index.html#naviguez-sur-le-site",
+    "title": "Bienvenue sur notre site",
+    "section": "Naviguez sur le site",
+    "text": "Naviguez sur le site\nExplorez nos analyses et résultats via les sections ci-dessous :\n\nStatistiques Descriptives\nDécouvrez une analyse détaillée des bases de données, avec des statistiques sur les brevets, les offres d’emploi et leur appariement.\nAnalyse des données\nExplorez les relations entre innovation et demande de compétences grâce à des visualisations créatives, des graphiques et des word clouds."
+  },
+  {
+    "objectID": "index.html#technologies-utilisées",
+    "href": "index.html#technologies-utilisées",
+    "title": "Bienvenue sur notre site",
+    "section": "Technologies utilisées",
+    "text": "Technologies utilisées\nCe projet utilise des technologies modernes pour garantir la précision et la clarté de nos analyses :\n\nR & Quarto : Analyse et visualisation des données.\nggplot2 & wordcloud2 : Création de graphiques et visualisations.\nGitHub Pages : Hébergement et déploiement du site."
+  },
+  {
+    "objectID": "index.html#contactez-nous",
+    "href": "index.html#contactez-nous",
+    "title": "Bienvenue sur notre site",
+    "section": "Contactez-nous",
+    "text": "Contactez-nous\nPour toute question ou suggestion, n’hésitez pas à nous contacter. Nous sommes ouverts aux collaborations et aux discussions !\n\nMOIELWAY NGARTI Israël\n\n\nBARKIRE DOURAMANE MOUSSA\n\n\nFABARIKA KARAMA\n\n\nISMAÏL\n\nBonnes explorations sur notre site !"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
