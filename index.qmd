@@ -23,10 +23,10 @@ Notre objectif est d'explorer des questions fascinantes telles que : Les entrepr
 
 Explorez nos analyses et résultats via les sections ci-dessous :
 
--   [**Statistiques Descriptives**](Statistiques descriptives.qmd)\
+-   [**Statistiques Descriptives**](Statistiques%20descriptives.qmd)\
     Découvrez une analyse détaillée des bases de données, avec des statistiques sur les brevets, les offres d’emploi et leur appariement.
 
--   [**Analyse des données**](Analyses de Données.qmd)\
+-   [**Analyse des données**](Analyses%20de%20données.qmd)\
     Explorez les relations entre innovation et demande de compétences grâce à des visualisations créatives, des graphiques et des word clouds.
 
 ------------------------------------------------------------------------
