@@ -38,7 +38,7 @@ write.csv(base_emp_inno, "base_emp_inno.csv", row.names = FALSE)
 
 ## 1-Base brevets
 
-### Statistiques descriptives du nombre d'offre d'emploi
+### Statistiques descriptives du nombre de brevets déposés
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #n_patents
@@ -55,6 +55,12 @@ kable(stat_n_patent, format = "html", caption = "Statistiques descriptives de n_
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
+**Interprétation :**
+
+-   La moyenne est faible (11.31), mais le maximum atteint 4870, ce qui suggère une répartition très inégale.
+
+-   L'écart-type (111.93) est très élevé comparé à la moyenne, indiquant une grande variabilité.
+
 ### Top 5 entreprises ayant déposées le plus de brevets.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -70,193 +76,11 @@ kable(top5_n_patents, format = "html", caption = "Top 5 des enttreprises ayant d
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Fonction pour trouver les 5 valeurs les plus fréquentes pour les variables caractères
-valeurs_frequentes <- function(data, variable, exclude_na = TRUE, top_n = 5) {
-  # Exclure les NA si demandé
-  if (exclude_na) {
-    data <- data %>% filter(!is.na(.data[[variable]]))
-  }
+**Interprétation :**
 
-  data %>%
-    group_by(across(all_of(variable))) %>%
-    summarise(count = n(), .groups = "drop") %>%
-    arrange(desc(count)) %>%
-    slice_head(n = 5)
-}
-```
+-   Ces entreprises montrent une forte contribution à l'innovation. Les deux premières sont des institutions de recherche, ce qui reflète une stratégie de production scientifique élevée.
 
-### Top 5 des descriptions des IPC principaux les plus frequents
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-top_ipc <- valeurs_frequentes(base_brevets, "ipc_main_desc")
-top_villes <- valeurs_frequentes(base_brevets, "addr_city_main")
-top_depts <- valeurs_frequentes(base_brevets, "addr_dept_main")
-
-# Étape 3 : Création du tableau HTML stylisé
-kable(top_ipc, format = "html", caption = "Top 5 des descriptions des IPC principaux les plus frequents") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
-  row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
-
-
-
-```
-
-### Top 5 des departements principaux les plus frequents
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-kable(top_depts, format = "html", caption = "Top 5 des departements principaux les plus frequents") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
-  row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
-```
-
-### Top 5 des villes principales les plus frequentes
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-kable(top_villes, format = "html", caption = "Top 5 des villes principales les plus frequentes") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
-  row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
-```
-
-## 2- Base emploi
-
-### Statistiques descriptives du nombre d'offre d'emploi
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#n_offres
-
-stat_n_offres <-base_emp %>%
-  summarise(
-    Moyenne = mean(n_offres, na.rm = TRUE),
-    Ecart_Type = sd(n_offres, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(n_offres)),
-    Minimum=min(n_offres,na.rm=TRUE),
-    Maximum=max(n_offres,na.rm=TRUE)
-    )
-# Création d'un tableau HTML stylisé
-kable(stat_n_offres, format = "html", caption = "Statistique n_offres") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-
-```
-
-### Statistiques descriptives des salaires moyens proposés par les entreprises
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#avg_wage
-
-stat_salaire<-base_emp %>%
-  summarise(
-    Moyenne = mean(avg_wage, na.rm = TRUE),
-    Ecart_Type = sd(avg_wage, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(avg_wage)),
-    Minimum=min(avg_wage,na.rm=TRUE),
-    Maximum=max(avg_wage,na.rm=TRUE))
-# Création d'un tableau HTML stylisé
-kable(stat_salaire, format = "html", caption = "Statistiques des salaires moyens") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-
-```
-
-### Top 5 des entreprises ayant fait beaucoup d'offfres d'emploi
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-# Trouver les 5 plus grandes valeurs pour la variable "n_offres" et garder la colonne firm_name
-top5_n_offres <- base_emp %>%
-  arrange(desc(n_offres)) %>%  # Trier par ordre décroissant de n_patent
-  slice_head(n = 5) %>%  # Garde les 5 premières lignes
-  select(firm_name, n_offres)  # Sélectionner uniquement les colonnes firm_name et n_patent
-
-# Création d'un tableau HTML stylisé
-kable(top5_n_offres, format = "html", caption = "Top 5 des entreprises ayant fait beaucoup d'offfres d'emploi") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-top_sector_main <- valeurs_frequentes(base_emp, "sector_main")
-top_addr_depts <- valeurs_frequentes(base_emp, "addr_dept_main")
-
-# Étape 3 : Création du tableau HTML stylisé
-kable(top_sector_main, format = "html", caption = "Top 5 des secteurs principaux les plus frequents") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
-  row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
-
-```
-
-### Top 5 des départements les plus fréquents
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Création du tableau HTML stylisé
-kable(top_addr_depts, format = "html", caption = "Top 5 des départements les plus fréquents") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
-  row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
-
-```
-
-## 3- Base emp_inno
-
-### Statistiques des nombres d'offres d'emploi de la fusion des bases
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#n_offres
-
-stat_n_offres_f<-base_emp_inno %>%
-  summarise(
-    Moyenne = mean(n_offres, na.rm = TRUE),
-    Ecart_Type = sd(n_offres, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(n_offres)),
-    Minimum=min(n_offres,na.rm=TRUE),
-    Maximum=max(n_offres,na.rm=TRUE)
-)
-# Création d'un tableau HTML stylisé
-kable(stat_n_offres_f, format = "html", caption = "Statistique n_offres de la fusion des bases") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#n_avg
-stat_salaire_f<-base_emp_inno %>%
-  summarise(
-    Moyenne = mean(avg_wage, na.rm = TRUE),
-    Ecart_Type = sd(avg_wage, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(avg_wage)),
-    Minimum=min(avg_wage,na.rm=TRUE),
-    Maximum=max(avg_wage,na.rm=TRUE)
-)
-# Création d'un tableau HTML stylisé
-kable(stat_salaire_f, format = "html", caption = "Statistique salaire moyen de la fusion des  bases") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#n_patents
-stat_n_patents_f<-base_emp_inno %>%
-  summarise(
-    Moyenne = mean(n_patents, na.rm = TRUE),
-    Ecart_Type = sd(n_patents, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(n_patents)),
-    Minimum=min(n_patents,na.rm=TRUE),
-    Maximum=max(n_patents,na.rm=TRUE)
-)
-# Création d'un tableau HTML stylisé
-kable(stat_n_patents_f, format = "html", caption = "Statistique n_patents de la table fusionnée") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-# Trouver les 5 plus grandes valeurs pour la variable "n_patent" et garder la colonne firm_name
-top5_n_patents <- base_brevets %>%
-  arrange(desc(n_patents)) %>%  # Trier par ordre décroissant de n_patent
-  slice_head(n = 5) %>%  # Garde les 5 premières lignes
-  select(firm_name, n_patents)  # Sélectionner uniquement les colonnes firm_name et n_patent
-
-# Création d'un tableau HTML stylisé
-kable(top5_n_patents, format = "html", caption = "Top 5 des enttreprises ayant déposées le plus de brevets") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
+-   Les entreprises industrielles comme Alcatel et Michelin démontrent une recherche appliquée importante.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Fonction pour trouver les 5 valeurs les plus fréquentes pour les variables caractères
@@ -290,6 +114,12 @@ kable(top_ipc, format = "html", caption = "Top 5 des descriptions des IPC princi
 
 ```
 
+**Interprétation :**
+
+-   La recherche semble majoritairement orientée vers la médecine, les matériaux de transport, et les technologies numériques.
+
+-   Cela pourrait refléter des priorités dans les secteurs biomédicaux et technologiques.
+
 ### Top 5 des departements principaux les plus frequents
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -297,6 +127,12 @@ kable(top_depts, format = "html", caption = "Top 5 des departements principaux l
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
   row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
 ```
+
+**Interprétation :**
+
+-   Paris (75) domine, ce qui est logique compte tenu de la concentration des institutions de recherche et des entreprises.
+
+-   La région parisienne (75 et 92) représente une part importante de l'activité en termes de brevets.
 
 ### Top 5 des villes principales les plus frequentes
 
@@ -306,6 +142,12 @@ kable(top_villes, format = "html", caption = "Top 5 des villes principales les p
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "responsive")) %>%
   row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
 ```
+
+**Interprétation :**
+
+-   Paris est encore une fois en tête, suivi de Lyon, qui est connue pour sa forte activité dans l'industrie et la recherche.
+
+-   Les villes listées montrent une répartition géographique intéressante, impliquant plusieurs régions.
 
 ## 2- Base emploi
 
@@ -328,6 +170,12 @@ kable(stat_n_offres, format = "html", caption = "Statistique n_offres") %>%
 
 ```
 
+**Interprétation :**
+
+-   La moyenne est relativement faible, mais le maximum élevé (68) montre une disparité significative.
+
+-   L'écart-type (8.37) est élevé par rapport à la moyenne, ce qui reflète une forte variabilité entre les entreprises.
+
 ### Statistiques descriptives des salaires moyens proposés par les entreprises
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -346,6 +194,12 @@ kable(stat_salaire, format = "html", caption = "Statistiques des salaires moyens
 
 ```
 
+**Interprétation :**
+
+-   La moyenne (53,230) et le maximum élevé (100,000) indiquent que certains postes sont très bien rémunérés.
+
+-   L'écart-type (15,090) montre une variation notable, probablement en fonction des secteurs ou des niveaux d'expérience.
+
 ### Top 5 des entreprises ayant fait beaucoup d'offfres d'emploi
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -362,6 +216,14 @@ kable(top5_n_offres, format = "html", caption = "Top 5 des entreprises ayant fai
 
 ```
 
+**Interprétation :**
+
+-   Ces entreprises sont probablement actives dans les secteurs technologiques et du conseil, qui génèrent de nombreuses opportunités d'emploi.
+
+-   CGI et Capgemini dominent, probablement en raison de leur forte demande en informatique et en ingénierie.
+
+### Top 5 des secteurs principaux les plus frequents
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 top_sector_main <- valeurs_frequentes(base_emp, "sector_main")
 top_addr_depts <- valeurs_frequentes(base_emp, "addr_dept_main")
@@ -373,6 +235,12 @@ kable(top_sector_main, format = "html", caption = "Top 5 des secteurs principaux
 
 ```
 
+**Interprétation :**
+
+-   Le secteur informatique domine largement, ce qui reflète l'importance croissante des technologies numériques dans l'économie.
+
+-   Les services aux entreprises et la finance sont également bien représentés, indiquant une forte demande dans ces domaines.
+
 ### Top 5 des départements les plus fréquents
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -382,6 +250,12 @@ kable(top_addr_depts, format = "html", caption = "Top 5 des départements les pl
   row_spec(0, bold = TRUE)  # Mettre en gras la ligne des entêtes
 
 ```
+
+**Interprétation :**
+
+-   Paris reste dominant en termes d'offres d'emploi, suivi par les départements périphériques comme le 92 (Hauts-de-Seine).
+
+-   Les départements de province sont moins actifs, reflétant une centralisation de l'activité économique.
 
 ## 3- Base emp_inno
 
@@ -403,6 +277,16 @@ kable(stat_n_offres_f, format = "html", caption = "Statistique n_offres de la fu
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
+**Interprétation :**
+
+-   La moyenne des offres par entité est faible (4.27), mais certaines entités ont jusqu’à **68 offres**, ce qui montre une concentration des offres chez certaines entreprises.
+
+-   L’écart-type (8.36) indique une variabilité importante dans le nombre d’offres.
+
+-   Le nombre élevé de valeurs manquantes (8187) suggère que beaucoup d’entités n’ont pas d’offres associées car elles n'existent que dans la base brevet.
+
+### Statistique salaire moyen de la fusion des bases
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #n_avg
 stat_salaire_f<-base_emp_inno %>%
@@ -418,6 +302,18 @@ kable(stat_salaire_f, format = "html", caption = "Statistique salaire moyen de l
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
+**Interprétation :**
+
+-   La moyenne des salaires est relativement élevée (53,230.29), ce qui correspond à des postes qualifiés ou des secteurs rémunérateurs.
+
+-   L’écart-type (15,090.82) est élevé, ce qui montre une grande disparité salariale entre les postes.
+
+-   Le salaire maximum atteint 100,000 par an, indiquant des postes de haut niveau.
+
+-   Le nombre élevé de valeurs manquantes (8747) est dû au fait qu'il y a des entreprises qui ne sont pas dans les deux bases.
+
+### Statistique n_patents de la table fusionnée
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #n_patents
 stat_n_patents_f<-base_emp_inno %>%
@@ -432,3 +328,11 @@ stat_n_patents_f<-base_emp_inno %>%
 kable(stat_n_patents_f, format = "html", caption = "Statistique n_patents de la table fusionnée") %>%
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
+
+**Interprétation :**
+
+-   La moyenne (11.43) et l’écart-type élevé (112.42) confirment une grande variabilité dans le nombre de brevets déposés par entité.
+
+-   La valeur maximale de **4870 brevets** souligne qu’un petit nombre d’entités est à l’origine d’une grande partie des brevets, ce qui est typique dans des secteurs où l’innovation est centralisée.
+
+-   Les valeurs manquantes (651) élevées sont dues au fait qu'il y a des entreprises qui n'existent pas dans les deux bases.
