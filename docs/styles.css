@@ -1,1 +1,20 @@
-/* css styles */
+header {
+    background: linear-gradient(to right, #0078d7, #0000FF);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+h1 {
+    margin: 0;
+}
+
+section {
+    margin: 0; 
+    padding: 0; 
+}
+
+section h1, section p, section div {
+    margin: 0;
+}

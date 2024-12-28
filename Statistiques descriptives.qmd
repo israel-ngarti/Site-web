@@ -1,3 +1,9 @@
+---
+title: "STATISTIQUES DESCRIPTIVES"
+format: html
+editor: visual
+---
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #Chargement des packages
 library(dplyr) 
@@ -30,9 +36,7 @@ base_emp_inno <- full_join(base_brevets, base_emp, by = "firm_name")
 write.csv(base_emp_inno, "base_emp_inno.csv", row.names = FALSE)
 ```
 
-# STATISTIQUES DESCRIPTIVES
-
-### 1-Base brevets
+## 1-Base brevets
 
 ### Statistiques descriptives du nombre d'offre d'emploi
 
@@ -240,61 +244,6 @@ stat_n_patents_f<-base_emp_inno %>%
 kable(stat_n_patents_f, format = "html", caption = "Statistique n_patents de la table fusionnée") %>%
   kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#Chargement des packages
-library(dplyr) 
-library(readr)
-library(stringr)
-library(tidyr)
-library(stringi)
-library(data.table)
-library(knitr)  
-library(kableExtra) 
-library(wordcloud)
-library(tidytext)
-library(ggplot2)
-library(wordcloud2)
-library(RColorBrewer)
-library(viridis)
-library(tidytext)
-library(stopwords)
-
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#Importation des données
-# Lecture des fichiers sans afficher les détails des colonnes
-base_emp <- read_csv("data/base_emp.csv", show_col_types = FALSE)
-base_brevets <- read_csv("data/base_brevets.csv", show_col_types = FALSE)
-base_emp_inno <- read_csv("data/base_emp_inno.csv", show_col_types = FALSE)
-base_emp_inno <- full_join(base_brevets, base_emp, by = "firm_name")
-# Exportation de la base_emp_inno au format CSV
-write.csv(base_emp_inno, "base_emp_inno.csv", row.names = FALSE)
-```
-
-# STATISTIQUES DESCRIPTIVES
-
-### 1-Base brevets
-
-### Statistiques descriptives du nombre d'offre d'emploi
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-#n_patents
-
-stat_n_patent<-base_brevets %>%
-  summarise(
-    Moyenne = mean(n_patents, na.rm = TRUE),
-    Ecart_Type = sd(n_patents, na.rm = TRUE),
-    Valeurs_Manquantes = sum(is.na(n_patents)),
-    Minimum=min(n_patents,na.rm=TRUE),
-    Maximum=max(n_patents,na.rm=TRUE))
-# Création d'un tableau HTML stylisé
-kable(stat_n_patent, format = "html", caption = "Statistiques descriptives de n_patents") %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
-
-### Top 5 entreprises ayant déposées le plus de brevets.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 

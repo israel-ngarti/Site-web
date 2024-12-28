@@ -10,7 +10,7 @@ website:
       - href: Statistiques descriptives.qmd
         text: Statistiques descriptives
       - href: Analyses de Données.qmd
-        text: Analyses de données
+        text: Analyses de Données
   
 
 format:

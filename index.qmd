@@ -8,7 +8,7 @@ editor: visual
 
 ## Présentation du projet
 
-Notre objectif est d'explorer des questions fascinantes telles que : Les entreprises les plus innovantes paient-elles les meilleurs salaires ? Demandent-elles davantage de \*\*data scientists\*\* ou de compétences en \*\* machine learning \*\* ? Quels secteurs montrent les plus grandes tendances en termes d'innovation et de recrutement ?
+Notre objectif est d'explorer des questions fascinantes telles que : Les entreprises les plus innovantes paient-elles les meilleurs salaires ? Demandent-elles davantage de data scientists ou de compétences en machine learning ? Quels secteurs montrent les plus grandes tendances en termes d'innovation et de recrutement ?
 
 ------------------------------------------------------------------------
 
@@ -45,13 +45,13 @@ Ce projet utilise des technologies modernes pour garantir la précision et la cl
 
 Pour toute question ou suggestion, n'hésitez pas à nous contacter. Nous sommes ouverts aux collaborations et aux discussions !
 
-#### MOIELWAY NGARTI Israël
+#### MOIELWAY NGARTI Israël (israel.moielway-ngarti\@u-bordeaux.fr)
 
-#### BARKIRE DOURAMANE MOUSSA
+#### BARKIRE DOURAMANE MOUSSA (barkire.douramane-moussa\@u-bordeaux.fr)
 
-#### FABARIKA KARAMA
+#### FABARIKA TIEBELE KARAMA (fabarika-tiebele.karama\@u-bordeaux.fr)
 
-#### ISMAÏL
+#### ISMAÏL ZAROQ (ismail.zaroq\@u-bordeaux.fr)
 
 ------------------------------------------------------------------------
 
